@@ -14,8 +14,20 @@
   </nav>
   <main>
     <h1>About MiniGameHub</h1>
-    <p>This website is a hub for quick, simple browser games made in pure HTML, CSS, and JavaScript.</p>
-    <p>No downloads, no ads. Build and play more games by creating new HTML files and adding them to the homepage list in <code>scripts.js</code>!</p>
+    <p>MiniGameHub is your destination for quick, engaging browser games designed for instant fun—no accounts, downloads, or intrusive ads.
+Our mission is to provide a clean, accessible platform where anyone can discover and play quality games built with pure HTML, CSS, and JavaScript.</p>
+    <p>Whether you’re looking to challenge your mind, test your reflexes, or simply relax with a quick puzzle, you’ll find something to enjoy here.
+We continually add new games, and welcome creativity—if you’d like to see your game featured, reach out or contribute!</p>
+  <p>Enjoy fast loading, distraction-free gameplay, and seamless switching between light and dark modes to suit your style.
+MiniGameHub makes simple fun available to everyone, everywhere.</p> 
   </main>
+  <script>
+  // Apply saved theme on page load (excluding settings.html, which has its own script)
+  if(!window.location.pathname.endsWith("settings.html")) {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+</script>
 </body>
 </html>
