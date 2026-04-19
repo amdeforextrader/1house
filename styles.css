@@ -65,3 +65,36 @@ h1, h2 { text-align: center; }
   main { padding: 0.3em;}
   .games-grid { grid-template-columns: 1fr;}
 }
+/* Dark mode basics */
+body.dark-mode {
+  background: #13151a;
+  color: #eee;
+}
+body.dark-mode nav {
+  background: #11131b;
+  color: #fff;
+}
+body.dark-mode main {
+  background: #181b22;
+  color: #eee;
+}
+body.dark-mode .game-card {
+  background: #1e2330;
+  color: #eee;
+}
+body.dark-mode .ttt-cell {
+  background: #242b39;
+  color: #eee;
+}
+body.dark-mode .ttt-cell:hover {
+  background: #303950;
+}
+
+.settings-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1em;
+  margin-top: 2em;
+  font-size: 1.2em;
+}
