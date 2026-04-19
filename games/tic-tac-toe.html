@@ -99,5 +99,13 @@
 
     window.onload = initTicTacToe;
   </script>
+<script>
+  // Apply saved theme on page load (excluding settings.html, which has its own script)
+  if(!window.location.pathname.endsWith("settings.html")) {
+    if (localStorage.getItem("theme") === "dark") {
+      document.body.classList.add("dark-mode");
+    }
+  }
+</script>
 </body>
 </html>
