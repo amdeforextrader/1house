@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings | MiniGameHub</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html" class="logo">MiniGameHub</a>
+    <a href="about.html">About</a>
+    <a href="settings.html">Settings</a>
+  </nav>
+  <main>
+    <h1>Settings</h1>
+    <div class="settings-group">
+      <label for="theme-switch">Dark Mode:</label>
+      <input type="checkbox" id="theme-switch" />
+      <span id="theme-label">Light</span>
+    </div>
+  </main>
+  <script>
+    // Simple theme persistence
+    function applyTheme() {
+      const dark = localStorage.getItem("theme") === "dark";
+      document.body.classList.toggle("dark-mode", dark);
+      document.getElementById("theme-switch").checked = dark;
+      document.getElementById("theme-label").textContent = dark ? "Dark" : "Light";
+    }
+    document.getElementById("theme-switch").addEventListener("change", function(){
+      localStorage.setItem("theme", this.checked ? "dark" : "light");
+      applyTheme();
+    });
+    // Init with previously chosen theme
+    applyTheme();
+  </script>
+</body>
+</html>
