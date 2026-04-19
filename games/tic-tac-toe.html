@@ -1,20 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About | MiniGameHub</title>
-  <link rel="stylesheet" href="styles.css" />
+  <title>Tic Tac Toe | MiniGameHub</title>
+  <link rel="stylesheet" href="../styles.css">
+  <style>
+    .tictactoe-board {
+      display: grid;
+      grid-template-columns: repeat(3, 80px);
+      grid-template-rows: repeat(3, 80px);
+      gap: 5px;
+      justify-content: center;
+      margin: 2em 0;
+    }
+    .ttt-cell {
+      width: 80px; height: 80px;
+      background: #f5f6fa;
+      font-size: 2.5em;
+      font-weight: bold;
+      color: #222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 10px;
+      transition: background 0.18s;
+    }
+    .ttt-cell:hover {
+      background: #e2e6fa;
+    }
+    .ttt-status {
+      text-align: center; font-size: 1.2em; font-weight: bold; margin: 16px 0;
+    }
+    .ttt-reset {
+      display: block; margin: 0 auto 1em; padding: .4em 1.2em; font-size: 1em;
+      background: #4456ff; border: none; color: #fff; border-radius: 24px; cursor: pointer;
+    }
+  </style>
 </head>
 <body>
   <nav>
-    <a href="index.html" class="logo">MiniGameHub</a>
-    <a href="about.html">About</a>
+    <a href="../index.html" class="logo">MiniGameHub</a>
+    <a href="../about.html">About</a>
   </nav>
   <main>
-    <h1>About MiniGameHub</h1>
-    <p>This website is a hub for quick, simple browser games made in pure HTML, CSS, and JavaScript.</p>
-    <p>No downloads, no ads. Build and play more games by creating new HTML files and adding them to the homepage list in <code>scripts.js</code>!</p>
+    <a href="../index.html" class="back-link">&larr; Back to All Games</a>
+    <h2>Tic Tac Toe</h2>
+    <div class="ttt-status" id="ttt-status">Player X's turn</div>
+    <div class="tictactoe-board" id="ttt-board"></div>
+    <button class="ttt-reset" onclick="initTicTacToe()">Restart</button>
   </main>
+  <script>
+    let tttBoard, tttStatus, current, boardArr, gameOver;
+
+    function initTicTacToe() {
+      current = "X";
+      gameOver = false;
+      boardArr = Array(9).fill("");
+      tttBoard = document.getElementById('ttt-board');
+      tttStatus = document.getElementById('ttt-status');
+      tttBoard.innerHTML = "";
+      for(let i=0; i<9; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'ttt-cell';
+        cell.addEventListener('click', ()=>tttMove(i));
+        cell.innerText = "";
+        tttBoard.appendChild(cell);
+      }
+      tttStatus.innerText = `Player X's turn`;
+    }
+
+    function tttMove(i) {
+      if(gameOver || boardArr[i]) return;
+      boardArr[i] = current;
+      tttBoard.children[i].innerText = current;
+      if(checkWin(current)) {
+        tttStatus.innerText = `Player ${current} wins!`;
+        gameOver = true;
+      } else if(boardArr.every(c=>c)) {
+        tttStatus.innerText = `It's a tie!`;
+        gameOver = true;
+      } else {
+        current = current === "X" ? "O" : "X";
+        tttStatus.innerText = `Player ${current}'s turn`;
+      }
+    }
+
+    function checkWin(p) {
+      const wins = [
+        [0,1,2],[3,4,5],[6,7,8],
+        [0,3,6],[1,4,7],[2,5,8],
+        [0,4,8],[2,4,6]
+      ];
+      return wins.some(combo => combo.every(idx => boardArr[idx] === p));
+    }
+
+    window.onload = initTicTacToe;
+  </script>
 </body>
 </html>
